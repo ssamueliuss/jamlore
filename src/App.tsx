@@ -1,50 +1,37 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+import { useState } from 'react';
+import { Sidebar } from './components/layout/Sidebar';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  const [activeTab, setActiveTab] = useState('todos');
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    /* 1. Fondo principal cambiado a slate-50 (gris casi blanco) */
+    <div className="flex h-screen bg-slate-50 overflow-hidden">
+      
+      {/* Componente Sidebar (Asegúrate de actualizar los colores dentro de este componente también) */}
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+      {/* 2. Contenido Principal: Fondo blanco puro para resaltar sobre el fondo grisáceo */}
+      <main className="flex-1 overflow-y-auto bg-white text-slate-900 p-8 shadow-inner">
+        <header className="mb-8">
+          {/* 3. Título en slate-900 para máximo contraste */}
+          <h2 className="text-3xl font-bold capitalize text-slate-900">
+            {activeTab === 'todos' ? 'Biblioteca Global' : activeTab + 's'}
+          </h2>
+          <p className="text-slate-600">Gestiona los elementos de tu mundo creativo.</p>
+        </header>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+        {/* Rejilla de contenido */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          {/* 4. Tarjeta vacía: Borde más suave (slate-200) y fondo sutil (slate-50) */}
+          <div className="h-40 border-2 border-dashed border-slate-200 bg-slate-50/50 rounded-2xl flex items-center justify-center text-slate-400 font-medium">
+            No hay {activeTab} creados aún.
+          </div>
+          
+        </div>
+      </main>
+    </div>
   );
 }
 
