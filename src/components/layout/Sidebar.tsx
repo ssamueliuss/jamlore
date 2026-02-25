@@ -6,15 +6,18 @@ import {
   Library, 
   PlusCircle, 
   Settings,
-  Search
+  Search,
+  ArrowLeft
 } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  projectName: string; // Nombre del juego activo
+  onBack: () => void;  // Función para volver al selector de proyectos
 }
 
-export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
+export function Sidebar({ activeTab, setActiveTab, projectName, onBack }: SidebarProps) {
   
   const menuItems = [
     { id: 'todos', label: 'Biblioteca', icon: Library },
@@ -25,21 +28,30 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   ];
 
   return (
-    /* 1. Fondo cambiado a blanco y borde derecho sutil */
     <aside className="w-64 h-screen bg-white text-slate-600 flex flex-col border-r border-slate-200">
       
-      {/* HEADER - Logo SillyDevs Style */}
+      {/* HEADER - Logo & Info de Proyecto */}
       <div className="p-6">
-        <div className="flex items-center gap-3 mb-6">
+        {/* Botón Volver */}
+        <button 
+          onClick={onBack}
+          className="flex items-center gap-2 text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-4 hover:text-indigo-700 transition-colors group"
+        >
+          <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+          Proyectos
+        </button>
+
+        <div className="flex items-center gap-3 mb-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md shadow-indigo-200">
             JL
           </div>
-          <h1 className="text-xl font-black tracking-tighter text-slate-900">
-            Jam<span className="text-indigo-600">Lore</span>
+          <h1 className="text-xl font-black tracking-tighter text-slate-900 truncate">
+            {projectName}
           </h1>
         </div>
+        <p className="text-[10px] text-slate-400 font-medium mb-6 px-1">Workspace Activo</p>
 
-        {/* BUSCADOR RÁPIDO - Fondo slate-100 y bordes suaves */}
+        {/* BUSCADOR RÁPIDO */}
         <div className="relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={16} />
           <input 
@@ -87,7 +99,10 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           <div className="w-6 h-6 bg-slate-200 text-slate-600 rounded-full flex items-center justify-center text-[10px] font-bold">
             SA
           </div>
-          <span className="text-xs font-medium text-slate-500">Samuel A.</span>
+          <div className="flex flex-col">
+            <span className="text-xs font-bold text-slate-700 leading-none">Samuel A.</span>
+            <span className="text-[9px] text-slate-400">SillyDevs Editor</span>
+          </div>
         </div>
       </div>
     </aside>
