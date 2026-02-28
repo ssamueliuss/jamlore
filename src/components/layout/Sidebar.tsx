@@ -23,7 +23,7 @@ export function Sidebar({ activeTab, setActiveTab, projectName, onBack }: Sideba
     { id: 'todos', label: 'Biblioteca', icon: Library },
     { id: 'personaje', label: 'Personajes', icon: Users },
     { id: 'lugar', label: 'Localizaciones', icon: MapPin },
-    { id: 'objeto', label: 'Artefactos', icon: Sword },
+    { id: 'objeto', label: 'Objetos', icon: Sword },
     { id: 'evento', label: 'Cronología', icon: History },
   ];
 
