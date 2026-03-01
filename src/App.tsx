@@ -286,7 +286,7 @@ function App() {
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500/20 outline-none text-sm min-h-[80px] resize-none"
                 value={descValue}
                 onChange={(e) => setDescValue(e.target.value)}
-                placeholder="¿Quién es o qué hace este elemento?"
+                placeholder="¿Quién es, qué hace, o dónde está este elemento?"
               />
             </div>
           </div>
